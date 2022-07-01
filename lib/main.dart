@@ -12,12 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Stop Watch',
+        title: 'Countdown Timer',
         home: _MyHomePage(),
         theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.pinkAccent,
-          scaffoldBackgroundColor: Colors.black,
+          primaryColor: Colors.amberAccent,
+          accentColor: Colors.deepOrangeAccent,
+          appBarTheme: AppBarTheme(backgroundColor: Colors.transparent)
+          
         ));
   }
 }
@@ -27,11 +28,17 @@ class _MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dynamic appBar = Platform.isIOS
-        ? CupertinoNavigationBar(middle: Text("Stop Watch"))
-        : AppBar(title: Text("Stop Watch"));
-    return Scaffold(
+        ? CupertinoNavigationBar(middle: Text("Timer"))
+        : AppBar(title: Text("Timer"));
+    return Container(
+      decoration: BoxDecoration(
+              gradient: LinearGradient(begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.purple, Colors.orange])),
+      child:Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: appBar,
       body: CountDownWidget()
-    );
+    ));
   }
 }

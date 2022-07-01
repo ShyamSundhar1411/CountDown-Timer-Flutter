@@ -13,15 +13,20 @@ class CountDownDisplayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final seconds = convertoTwoDigits(duration.inSeconds.remainder(60));
     final minutes = convertoTwoDigits(duration.inMinutes.remainder(60));
-    return Container(padding:EdgeInsets.all(8),child:Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TimeCardWidget("Hours", convertoTwoDigits(duration.inHours.remainder(60))),
-        SizedBox(width:8),
-        TimeCardWidget("Minutes",minutes.toString()),
-        SizedBox(width:8),
-        TimeCardWidget("Seconds", seconds.toString()),
-      ],
-    ));
+    return Container(
+      padding: EdgeInsets.all(8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TimeCardWidget(
+              "Hours", convertoTwoDigits(duration.inHours.remainder(60))),
+          SizedBox(width: 8),
+          TimeCardWidget("Minutes", minutes.toString()),
+          SizedBox(width: 8),
+          TimeCardWidget("Seconds", seconds.toString()),
+        ],
+      ),
+    );
+    ;
   }
 }
