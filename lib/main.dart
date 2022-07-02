@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Countdown Timer',
+        title: 'PTS NEET ASSESSMENT WATCH',
         home: _MyHomePage(),
         theme: ThemeData(
           primaryColor: Colors.amberAccent,
@@ -28,8 +28,8 @@ class _MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dynamic appBar = Platform.isIOS
-        ? CupertinoNavigationBar(middle: Text("Timer"))
-        : AppBar(title: Text("Timer"));
+        ? CupertinoNavigationBar(middle: Text("PTS NEET ASSESSMENT WATCH"))
+        : AppBar(title: Text("PTS NEET ASSESSMENT WATCH"));
     return Container(
       decoration: BoxDecoration(
               gradient: LinearGradient(begin: Alignment.topLeft,

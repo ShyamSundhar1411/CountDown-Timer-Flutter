@@ -2,7 +2,7 @@ import 'dart:async';
 import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
 import '../widgets/countdownDisplay.dart';
-import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 
 class CountDownWidget extends StatefulWidget {
   const CountDownWidget({Key? key}) : super(key: key);
@@ -15,6 +15,7 @@ class _CountDownWidgetState extends State<CountDownWidget> {
   Duration duration = Duration(seconds: 0);
   Timer? timer;
   bool isCountDown = false;
+
   @override
   void initState() {
     super.initState();
@@ -34,16 +35,21 @@ class _CountDownWidgetState extends State<CountDownWidget> {
     });
   }
 
+  Future<void> playAudio() async {
+    await FlutterPlatformAlert.playAlertSound(iconStyle: IconStyle.exclamation,);
+
+    final clickedButton = await FlutterPlatformAlert.showAlert(
+      windowTitle: 'CountDown',
+      text: 'CountDown has expired',
+      alertStyle: AlertButtonStyle.ok,
+      iconStyle: IconStyle.information,
+    );
+  }
+
   void cancelTimer() {
     timer?.cancel();
     isCountDown = false;
-    FlutterRingtonePlayer.play(
-      android: AndroidSounds.notification,
-      ios: IosSounds.glass,
-      looping: true, // Android only - API >= 28
-      volume: 3, // Android only - API >= 28
-      asAlarm: true, // Android only - all APIs
-    );
+    playAudio();
     print("Played");
   }
 
@@ -53,7 +59,7 @@ class _CountDownWidgetState extends State<CountDownWidget> {
         duration.inMinutes != 0) {
       setState(() {
         isCountDown = false;
-         timer?.cancel();
+        timer?.cancel();
       });
     } else {
       cancelTimer();
@@ -100,7 +106,16 @@ class _CountDownWidgetState extends State<CountDownWidget> {
                               : null,
                           child: Text("Stop Count Down")),
                     ],
-                  )
-                ])));
+                  ),
+            SizedBox(width: 5),
+            SizedBox(width: 5),
+            Container(
+              padding:EdgeInsets.all(8),
+              decoration: BoxDecoration(),
+              child:Center(child:Text("When you don't know what to do, you do what you know",style:TextStyle(color:Colors.white,fontSize:20,fontWeight: FontWeight.bold))))
+          ]
+        )
+      )
+    );
   }
 }
